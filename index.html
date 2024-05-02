@@ -8,15 +8,16 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="shortcut icon" href="./assets/Imagenes/logo02.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
-    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="/styles/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Meta etiquetas para SEO -->
     <meta name="description" content="¡Captura tus momentos más preciados y conviértelos en recuerdos eternos con ForeverFramed.com! Expertos en transformar tus eventos especiales en obras de arte digital.">
     <meta name="keywords" content="ForeverFramed, recuerdos, momentos, arte digital, eventos especiales">
     <!-- Fin de meta etiquetas para SEO -->
+
 </head>
 
-<body>
+<body onload="saludoinicial()">
     <header class="headerff">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -29,13 +30,13 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active"  href="/paginas/servicios.html">Servicios</a>
+                            <a class="nav-link active"  href="#servicios">Servicios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/paginas/proyectos.html">Proyectos</a>
+                            <a class="nav-link" href="#proyectos">Proyectos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/paginas/tuhistoria.html">Tu historia</a>
+                            <a class="nav-link" href="#tuhistoria">Tu historia</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/paginas/contacto.html">Contacto</a>
@@ -56,39 +57,97 @@
         </section>
     </div>
 
-    <section class="container text-center section-montserrat d-flex flex-column justify-content-center align-items-center">        <h1>Tus recuerdos, como nunca antes</h1>
+    <section id="custom-section" class="container text-center section-montserrat d-flex flex-column justify-content-center align-items-center"> 
+        <h1>Tus recuerdos, como nunca antes</h1>
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-md-4">
                 <div class="custom-div">
                     <h5>Viajes inolvidables</h5>
                     <p>Viajes de todo tipo, recuerdos para siempre.</p>
-                    <button class="btn btn-primary  bg-warning">Ver ejemplo</button>
+                    <button class="btn btn-primary  bg-warning">Obtenlo por 10 usd</button>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-md-4">
                 <div class="custom-div">
                     <h5>Fiestas únicas</h5>
                     <p>Bodas, cumpleaños, aniversarios.</p>
-                    <button class="btn btn-primary  bg-warning">Ver ejemplo</button>
+                    <button class="btn btn-primary  bg-warning">Obtenlo por 15 usd</button>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-md-4">
                 <div class="custom-div">
                     <h5>Días para recordar</h5>
                     <p>Bautizos, graduaciones, eventos.</p>
-                    <button class="btn btn-primary bg-warning">Ver ejemplo</button>
+                    <button class="btn btn-primary bg-warning">Obtenlo por 20 usd</button>
                 </div>
             </div>
         </div>
+       
+        <button id="limpiar-carrito" class="btn btn-danger">Limpiar Carrito</button>
     </section>
 
     <div class="seccion2-home">
         <section>
-            <h3 class="titulo3-home">Nuestros servicios</h3>
+            <h3 class="titulo3-home" id="servicios">Nuestros servicios</h3>
             <p class="parrafoh4-home">¡Captura tus momentos más preciados y conviértelos en recuerdos eternos con ForeverFramed.com! Expertos en transformar tus eventos especiales en obras de arte digital, estamos aquí para asegurarnos de que cada momento importante de tu vida brille en la pantalla. Descubre la magia de inmortalizar tus recuerdos con nosotros.</p>
             <img src="./assets/Imagenes/imagenbanner2home.jpg" alt="pareja-home2">
             <a href="./paginas/contacto.html" class="boton-contacto2">Contacto</a>
         </section>
+    </div>
+    <div>
+        <section class="seccion2-servicios">
+            <h3>Nuestros servicios</h3>
+            <p>¡Capturamos tus momentos más preciados y conviértelos en recuerdos eternos con ForeverFramed.com! Expertos en transformar tus eventos especiales en obras de arte digital, estamos aquí para asegurarnos de que cada momento importante de tu vida brille en la pantalla. Descubre la magia de inmortalizar tus recuerdos con nosotros.</p>
+            <ul class="lista-iconos">
+                <li><i class="fas fa-camera"></i> Edición de fotografías.</li>
+                <li><i class="fas fa-pen-alt"></i> Diseño de logotipo identificador.</li>
+                <li><i class="fas fa-book"></i> Diseño y desarrollo de Book de fotos Digital .</li>
+            </ul>
+            
+            <button id="boton-promocion1" class="boton-contacto2">Ver promoción 1</button>
+            <button id="boton-promocion2" class="boton-contacto3">Ver promoción 2</button>
+        </section>
+    <div>
+    
+        <div class="container-proyectos d-flex justify-content-center align-items-center">
+            <div class="row justify-content-center">
+              <h3 class="text-center" id="proyectos">
+                Hecha una mirada a estos proyectos
+              </h3>
+              <div class="col-md-3">
+                <div class="text-center">
+                  <img src="/assets/Imagenes/fotos.proyectos-18.png" class="rounded img-fluid" alt="Imagen 1">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="text-center">
+                  <img src="/assets/Imagenes/fotos.proyectos-19.png" class="rounded img-fluid" alt="Imagen 2">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="text-center">
+                  <img src="/assets/Imagenes/fotos.proyectos-20.png" class="rounded img-fluid" alt="Imagen 3">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="text-center">
+                  <img src="/assets/Imagenes/fotos.proyectos-21.png" class="rounded img-fluid" alt="Imagen 4">
+                </div>
+              </div>
+            </div>
+          </div>    
+
+    <div class="sec-historia-2" id="tuhistoria">
+            <section>
+                <h3>Ahora es tu turno: Enmarca tus recuerdos para siempre</h3>
+                <iframe class="video-seccion2-tuhistoria" src="https://www.youtube.com/embed/r6DzaGChCEc" frameborder="0" allowfullscreen></iframe>
+                <h4 class="titulo-seccion2-historia">Sigue estos pasos y comencemos la aventura</h4>
+                <ul class="lista-tuhistoria"> 
+                    <li><i class="fas fa-box"></i> Elige tu paquete</li>
+                    <li><i class="fas fa-palette"></i> Elige el estilo que quieras</li>
+                    <li><i class="fas fa-envelope"></i> Envía tus datos y fotos</li>
+                </ul>
+                <a href="contacto.html" class="btn btn-warning btn-sm align-center">Comenzar ahora</a>        </section>
     </div>
     
     <footer>
@@ -104,5 +163,8 @@
     </footer>
     <!-- Bootstrap JS -->
     <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="ruta/a/language.js"></script>
+
 </body>
 </html>

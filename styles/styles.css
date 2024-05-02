@@ -1,3 +1,15 @@
+@font-face {
+    font-family: 'Montserrat'; 
+    src: url('/assets/Fonts/Montserrat-Regular.ttf') format('truetype');
+    /* Agrega más formatos si es necesario */
+}
+
+@font-face {
+    font-family: 'Unbounded'; /* Nombre de la segunda fuente */
+    src: url('/assets/Fonts/Unbounded-VariableFont_wght.ttf') format('truetype');
+    /* Agrega más formatos si es necesario */
+}
+
 
 body {
     font-family: "Montserrat", sans-serif;
@@ -47,7 +59,8 @@ body {
 .seccion1 h1 {
     font-size: 32px;
     grid-column: 2;
-    grid-row: 2; /* El título está en la primera fila */
+    grid-row: 2;
+    font-family: 'Unbounded';
 }
 
 .seccion1 h2 {
@@ -87,7 +100,7 @@ body {
     }
 }
 
-/* CSS Sección banner 2 de home */
+/* CSS Sección Fondo negro de home */
 .seccion2-home section {
     width: 100%;
     height: 600px;
@@ -101,6 +114,7 @@ body {
 }
 
 .seccion2-home h3 {
+    font-family: 'Unbounded';
     font-size: 30px;
     align-self: center;
     grid-row: 2;
@@ -272,92 +286,29 @@ footer {
     margin-bottom: 10px;
 }
     
-/*CSS Sección 1 subpage SERVICIOS*/
+ /*CSS Sección recuerdos inolvidables home*/
 
-.seccion2 {
-    display: grid;
-    grid-template-columns: 40% 1fr; /* Dos columnas: la imagen al 40% y el contenido */
-    grid-template-rows: auto auto auto; /* Tres filas para cada elemento */
-    background-color: #f5d4a2; /* Cambia el color de fondo */
-    padding: 20px;
-    gap: 20px; /* Espacio entre los elementos */
-    align-items: center; /* Centra verticalmente los elementos */
+ #custom-section {
+    height: 400px; /* Cambia 500px por la altura deseada */
+}
 
-    /* Ajustes para dispositivos móviles */
-    @media (max-width: 768px) {
-        grid-template-columns: 1fr; /* Una sola columna para dispositivos móviles y tablets */
-        grid-template-rows: auto auto auto auto; /* Cuatro filas */
-        padding: 10px; /* Reduce el padding en dispositivos móviles y tablets */
+#custom-section {
+    padding: 50px 0; /* Agrega espacio alrededor del contenido */
+}
+
+@media (max-width: 768px) {
+    #custom-section {
+        padding: 80px 0; /* Aumenta el espacio en dispositivos con ancho igual o menor a 768px */
     }
 }
 
-#imagen1-seccionservicios {
-    max-width: 100%;
-    height: auto;
-    width: 100%; /* Ancho al 100% del contenedor */
-    grid-column: 1; /* Coloca la imagen en la columna 1 */
-    grid-row: 1 / span 4; /* Ocupa desde la fila 1 hasta la 4 */
 
-    /* Ajustes para dispositivos móviles y tablets */
-    @media (max-width: 768px) {
-        grid-column: 1; /* Coloca la imagen en la única columna */
-        grid-row: 1; /* Ocupa solo la fila 1 */
-        justify-self: center; /* Centra la imagen */
-    }
-}
 
-.seccion2 h1 {
-    font-weight: bold;
-    padding-top: 100px;
-    color: #181616;
-    margin: 0; /* Elimina el margen para los títulos */
-    grid-column: 2; /* En la segunda columna */
-    grid-row: 1; /* En la primera fila */
-
-    /* Ajustes para dispositivos móviles y tablets */
-    @media (max-width: 768px) {
-        font-size: 30px;
-        grid-column: 1; /* En la única columna */
-        grid-row: 2; /* En la segunda fila */
-        padding-top: 0px;
-    }
-}
-
-.seccion2 h2 {
-    font-size: 20px;
-    color: #181717;
-    margin: 0;
-    text-align: left; /* Alinea a la izquierda */
-    grid-column: 2; /* En la segunda columna */
-    grid-row: 2; /* En la segunda fila */
-
-    /* Ajustes para dispositivos móviles y tablets */
-    @media (max-width: 768px) {
-        font-size: 16px;
-        grid-column: 1; /* En la única columna */
-        grid-row: 3; /* En la tercera fila */
-    }
-}
-
-.seccion2 p {
-    font-size: 16px;
-    color: #141212;
-    margin: 0; /* Elimina el margen para el párrafo */
-    text-align: left; /* Alinea a la izquierda */
-    grid-column: 2; /* En la segunda columna */
-    grid-row: 3; /* En la tercera fila */
-
-    /* Ajustes para dispositivos móviles y tablets */
-    @media (max-width: 768px) {
-        font-size: 14px;
-        grid-column: 1; /* En la única columna */
-        grid-row: 4; /* En la cuarta fila */
-    }
-}
- /*CSS Sección banner 2 de subpage SERVICIOS*/
+ /*CSS Sección SERVICIOS Home*/
 
  .seccion2-servicios {
     display: grid;
+    height: 600;
     grid-template-columns: 1fr 1fr; /* Dos columnas de igual ancho */
     grid-template-rows: auto auto auto auto auto; /* Cinco filas con contenido */
     background-color: #fff0c0; /* Color de fondo */
@@ -369,6 +320,7 @@ footer {
 
 .seccion2-servicios h3 {
     color: #242420;
+    font-family: 'Unbounded';
     font-size: 40px;
     grid-column: 1 / span 2; /* Ocupa las dos columnas */
     grid-row: 1; /* En la primera fila */
@@ -422,8 +374,51 @@ footer {
     color:#242420
 }
 
-.boton-contacto2 a:hover {
+.boton-contacto2 a:hover 
+
+/* boton promocion 2*/
+
+.boton-contacto3 {
+    width: 210px;
+    height: 64px;
+    background-color: #ffbf00;
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: center;
+    line-height: 64px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #0c0c09;
+    text-decoration: none;
+    margin-left: 60px;
+    grid-row: 4;
+    grid-column: 1;
+    align-self: self-start;
 }
+
+.boton-contacto3:hover {
+    background-color: rgb(255, 123, 0);
+    transform: scale(1.1);
+}
+
+.boton-contacto3:hover a {
+    color: white;
+}
+
+
+.boton-contacto3  {
+    background-color: #ffbf00;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 15px;
+    transition: background-color 0.3s ease;
+    width: 50%;
+    border: none;
+}
+
+
 
 /* Media query para dispositivos móviles y tablets */
 @media (max-width: 768px) {
@@ -453,273 +448,146 @@ footer {
         grid-column: 1; /* En la única columna */
     }
 }
-    /* Tabla seccion servicios */
+          
+    
+  
+  /* Estilos para seccion video home */
 
-    table {
-        height: 200px;
-        background-color: #ffffff;
-        width: 50%;
-        border-collapse: collapse;
-        margin: 20px auto;
-    }
-    th, td {
-        border: 1px solid black;
-        padding: 8px;
-        text-align: left;
-    }
-    th {
-        background-color:#ffbf00
-    }
-
-    h2 {
-        text-align: center;
-        padding-top: 30px;
-    }
-     
-      
-     /*CSS Sección 1 subpage TU HISTORIA*/
-
-     .historia {
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* Dos columnas de igual ancho */
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr; 
-        height: 700px;
-        grid-gap: 0px; /* Espacio entre las columnas */
-        background-image: url(../assets/Imagenes/bnppalseccionhistoria.jpg);
-        background-size: cover;
-        background-position: center;
-    }
-    
-    .historia h1 {
-        align-content: center;
-        grid-row: 2;
-        grid-column: 1;
-        align-self: flex-end;
-        padding-left: 80px;
-    }
-    
-    .historia h2 {
-        align-content: center;
-        grid-row: 3;
-        grid-column: 1;
-        align-self: center;
-        justify-self: left;
-        padding-left: 80px;
-    }
-    
-    .historia p {
-        align-content: center;
-        grid-row: 4;
-        grid-column: 1;
-        align-self: center;
-        padding-left: 80px;
-        width: 500px;
-    }
-    
-    /* Media queries para hacerlo responsive */
-    @media screen and (max-width: 768px) {
-        .historia {
-            grid-template-columns: 1fr; /* Cambiamos a una sola columna */
-            height: 500px; /* Altura automática para adaptarse al contenido */
-            padding: 20px; /* Añadimos un espacio alrededor del contenido */
-            background-image: none; /* Quitamos la imagen de fondo */
-            background-color: #e2e1de; /* Color de fondo para tablets y móviles */
-        }
-    
-        .historia h1,
-        .historia h2,
-        .historia p {
-            grid-row: auto; /* Reiniciamos el grid-row a su valor por defecto */
-            grid-column: auto; /* Reiniciamos el grid-column a su valor por defecto */
-            align-self: center;
-            padding-left: 0; /* Quitamos el padding izquierdo */
-            text-align: center; /* Centramos el texto */
-            width: auto; /* Ancho automático para adaptarse al contenedor */
-        }
-    }
-     /*CSS Sección 2 subpage TU HISTORIA*/
-
-
-     .sec-historia-2 section {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-        width: 100%;
-        height: 1200px;
-        background-color: #fff0c0;
-    }
-    
-    .sec-historia-2 section h3 {
-        color: #242420;
-        justify-self: center;
-        font-size: 30px;
-        padding: 60px 0px 30px 0px;
-        grid-row: 1;
-    }
-    
-    .sec-historia-2 section h4 {
-        color: #242420;
-        justify-self: center;
-        font-size: 30px;
-        padding: 60px 0px 30px 0px;
-        grid-row: 3;
-    }
-    
-    .video-seccion2-tuhistoria {
-        width: 80%;
-        height: 670px;
-        margin: 0 auto;
-    }
-    
-    .lista-tuhistoria li {
-        justify-items: center;
-        font-family: "Montserrat", sans-serif;
-        font-size: 25px;
-        list-style: none;
-        grid-row: 4;
-    }
-    
-    .lista-tuhistoria li i {
-        font-size: 25px;
-        color: #f87e05;
-    }
-    
-    .lista-tuhistoria .boton-contacto2 {
-        justify-self: center;
-        align-self: center;
-        grid-row: 5;
-    }
-    
-    /* Media queries para hacerlo responsive */
-    @media screen and (max-width: 768px) {
-        .sec-historia-2 section {
-            height: 800px; /* Altura automática para adaptarse al contenido */
-            padding: 20px; /* Añadimos un espacio alrededor del contenido */
-        }
-    
-        .sec-historia-2 section h3,
-        .sec-historia-2 section h4,
-        .lista-tuhistoria li,
-        .lista-tuhistoria .boton-contacto2 {
-            grid-row: auto; /* Reiniciamos el grid-row a su valor por defecto */
-            justify-self: center;
-            text-align: center;
-        }
-    
-        .video-seccion2-tuhistoria {
-            width: 100%; /* Cambiamos el ancho al 100% */
-            height: auto; /* Altura automática para mantener la proporción */
-        }
-    }
-
-     /*CSS Sección 1 subpage PROYECTOS*/
-
-     .seccion1-proyectos {
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* Dos columnas de igual ancho */
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr; 
-        height: 700px;
-        grid-gap: 0px; /* Espacio entre las columnas */
-        background-image: url(../assets/Imagenes/bnppalseccionproyectos.jpg);
-        background-size: cover;
-        background-position: center;
-    }
-    
-    .seccion1-proyectos h1 {
-        font-size: 36px; 
-        grid-column: 2;
-        grid-row: 2;
-        padding-left: 30px;
-    }
-    
-    .seccion1-proyectos h2 {
-        font-size: 30px; 
-        grid-column: 2;
-        grid-row: 3;
-        padding-left: 30px;
-        justify-self: left;
-    }
-    
-    .seccion1-proyectos p {
-        grid-column: 2;
-        grid-row: 4;
-        padding-left: 30px;
-        width: 500px;
-    }
-    
-    /* Media queries para hacerlo responsive */
-    @media screen and (max-width: 768px) {
-        .seccion1-proyectos {
-            grid-template-columns: 1fr; /* Cambiamos a una sola columna */
-            height: 100 px; /* Altura automática para adaptarse al contenido */
-            padding: 20px; /* Añadimos un espacio alrededor del contenido */
-            background-image: none; /* Quitamos la imagen de fondo */
-            background-color: #fff0c0; /* Color de fondo para tablets y móviles */
-
-        }
-    
-        .seccion1-proyectos h1,
-        .seccion1-proyectos h2,
-        .seccion1-proyectos p {
-            grid-column: 1; /* Colocamos todo en la primera columna */
-            padding-left: 0; /* Quitamos el padding izquierdo */
-            text-align: center; /* Centramos el texto */
-            width: auto; /* Ancho automático para adaptarse al contenedor */
-        }
-    }
-
-    /*CSS Sección 2 subpage proyectos*/
-
-    .seccion2-proyectos {
-        display: grid;
-        width: 100%;
-        margin: 30px auto;
-        height: 600px;
-        background-color: #fff0c0;
-    }
-    
-    .seccion2-proyectos {
-        max-width: 100%;
-        margin: 0 auto;
-        text-align: center;
-    }
-    
-    .seccion2-proyectos h3 {
-        font-size: 30px;
-        color: #242420;
-        padding: 30px 0px 30px 0px
-    }
-    .seccion2-proyectos h4 {
-        color: #242420;
-        font-size: 20px;
-        padding-bottom: 30px ;
-    }
-    
-    #parrafo-seccion2-proyectos {
-        max-width: 600px;
-        margin: 0 auto;
-    }
-
-   .cuadros-grid {
+  .sec-historia-2 section {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 1fr);
+    width: 100%;
+    height: 1200px;
     background-color: #fff0c0;
+  }
+  
+  .sec-historia-2 section h3 {
+    font-family: 'Unbounded';
+    text-align: center;
+  }
+  
+  .sec-historia-2 section h4 {
+    font-family: 'Unbounded';
+    color: #242420;
+    text-align: center;
+    font-size: 30px;
+    padding: 60px 0px 30px 0px;
+  }
+  
+  .sec-historia-2 section .video-seccion2-tuhistoria {
+    width: 80%;
+    height: 670px;
+    margin: 0 auto;
+  }
+  
+  .sec-historia-2 section .lista-tuhistoria li {
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    list-style: none;
+    grid-row: 4;
+  }
+  
+  .sec-historia-2 section .lista-tuhistoria li i {
+    font-size: 25px;
+    color: #f87e05;
+  }
+  
+  .sec-historia-2 section .btn-warning {
+    padding: 5px 10px; /* Ajustar el padding para un botón más pequeño */
+    font-size: 30px; /* Tamaño de fuente más pequeño */
+  }
+  
+  .sec-historia-2 section .btn-sm {
+    padding: 5px 10px;
+    font-size: 25px;
+  }
+  
+  .sec-historia-2 section .align-center {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    text-align: center; /* Añadir también el alineamiento de texto al centro */
+  }
+  
+  /* Media query para hacerlo responsive */
+  @media screen and (max-width: 768px) {
+    .sec-historia-2 section {
+      height: 800px; /* Altura automática para adaptarse al contenido */
+      padding: 20px; /* Añadimos un espacio alrededor del contenido */
+    }
+  
+    .sec-historia-2 section h3,
+    .sec-historia-2 section h4,
+    .sec-historia-2 section .lista-tuhistoria li,
+    .sec-historia-2 section .lista-tuhistoria .boton-contacto2 {
+      grid-row: auto; /* Reiniciamos el grid-row a su valor por defecto */
+      justify-self: center;
+      text-align: center;
+    }
+  
+    .sec-historia-2 section .video-seccion2-tuhistoria {
+      width: 100%; /* Cambiamos el ancho al 100% */
+      height: auto; /* Altura automática para mantener la proporción */
+    }
+  }
+  
+  /* Estilos para polaroid de proyectos HOME */
 
-   }
-
-   .cuadros-grid article {
-    background-color: #ccc7c2;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    padding-top: 30px;
+  .container-proyectos {
+    height: 600px;
+    background-color: #fff0c0;
+  }
+  
+  .container-proyectos h3 {
+    font-family: 'Unbounded';
+    font-size: 36px;
     padding-bottom: 30px;
-    margin-right: 20px; /* Espacio a la derecha de cada artículo */
-    padding-left: 10px;
-}
-    
-
+    padding-top: 60px;
+  }
+  
+  .container-proyectos img {
+    width: 80%; /* Usaremos un ancho del 100% del contenedor */
+    height: auto;
+    margin-top: 20px;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+  
+  .container-proyectos .rounded:hover {
+    transform: rotate(3deg); /* Rotar 3 grados a la derecha en el hover */
+  }
+  
+  .col-md-3 {
+    margin-bottom: 20px; /* Añade margen inferior para separar las columnas */
+  }
+  
+ /* Media query para dispositivos móviles */
+@media screen and (max-width: 768px) {
+    .container-proyectos {
+      height: 1800px;
+      padding: 20px; /* Espaciado interno para dispositivos móviles */
+      background-color: #fff0c0;
+    }
+  
+    .container-proyectos img {
+      max-width: 80%;
+    }
+  }
+  
+  /* Media query para tablets */
+  @media screen and (max-width: 1024px) {
+    .container-proyectos {
+      height: auto; /* Altura automática para adaptarse al contenido */
+      padding: 20px; /* Espaciado interno para tablets */
+      background-color: #fff0c0;
+    }
+  
+    .container-proyectos img {
+      max-width: 100%; /* Imágenes al 100% del ancho del contenedor */
+      height: auto; /* Altura automática para mantener la proporción */
+    }
+  }
     
     /*CSS subpage contacto*/
 
@@ -784,7 +652,7 @@ footer {
     }
 }
 
-    
+
   
 
     
