@@ -8,7 +8,6 @@
 //*     >=              Es mayor o igual
 //*     && AND
 //*     || OR
-//*      ! NOT
 
 
 
