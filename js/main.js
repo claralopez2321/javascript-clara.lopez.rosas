@@ -13,10 +13,10 @@
 
 // While
 
-// Obtener el elemento h1
-const titulo = document.querySelector('.titulo1');
+// Obtener el elemento h1 mediante getElementsByClassName
+const titulo = document.getElementsByClassName('titulo1')[0];
 
-// apuntes en verde: Definir una función para cambiar el estilo del texto
+// Definir una función para cambiar el estilo del texto
 function animarTitulo() {
   // Alternar entre dos colores diferentes cada 1 segundo
   if (titulo.style.color === 'blue') {
@@ -28,6 +28,12 @@ function animarTitulo() {
 
 // Llamar a la función animarTitulo() cada 1 segundo
 setInterval(animarTitulo, 1000);
+
+//------------------------------------
+
+
+
+//------------------ pedir nombre y mostrarlo
 
 function saludoinicial(nombre) {
   alert("Hola " + nombre + " elije el plan para tí!");
@@ -41,39 +47,38 @@ do {
 
 saludoinicial(nombreIngresado);
 
-function sumar(num1, num2) {
-  return num1 + num2;
-}
 
-let resultado = sumar(2, 30)
-console.log(resultado)
+//---------------
+// Función para manejar el clic en un botón de producto
+function handleProductClick(price) {
+  // Sumar el precio al total
+  total += price;
 
-
-// probando Función para mostrar el mensaje de alerta con el precio
-function showAlert(total) {
-  alert("El total de tu pedido es " + total + " USD");
+  // Mostrar el mensaje de alerta con el total actualizado
+  showAlert(total);
 }
 
 // Variable para almacenar el total del pedido
 var total = 0;
 
 // Obtener todos los botones por su clase y agregar evento de clic
-var buttons = document.querySelectorAll('.btn-primary');
+var buttons = document.querySelectorAll('.btn.btn-primary.bg-warning');
 
 // Iterar sobre cada botón y agregar un evento de clic
 buttons.forEach(function(button) {
   button.addEventListener('click', function() {
-      // Obtener el precio del botón
-      var buttonText = this.textContent.trim();
-      var price = parseFloat(buttonText.split(' ')[2]);
-
-      // Sumar el precio al total
-      total += price;
-
-      // Mostrar el mensaje de alerta con el total actualizado
-      showAlert(total);
+    // Obtener el precio del botón
+    var buttonText = this.textContent.trim();
+    var price = parseFloat(buttonText.split(' ')[2]);
+    // Llamar a la función para manejar el clic en el botón
+    handleProductClick(price);
   });
 });
+
+// Función para mostrar el mensaje de alerta con el precio
+function showAlert(total) {
+  alert("El total de tu pedido es " + total + " USD");
+}
 
 // Función para limpiar el carrito
 function limpiarCarrito() {
@@ -86,6 +91,7 @@ var btnLimpiarCarrito = document.getElementById('limpiar-carrito');
 
 // Agregar evento de clic al botón de limpiar carrito
 btnLimpiarCarrito.addEventListener('click', limpiarCarrito);
+//----------------------------------
 
 // Definir objetos para representar promociones de servicios
 var promocion1 = {
@@ -109,15 +115,25 @@ function mostrarPromocion(promocion) {
   `);
 }
 
+// Función para manejar la lógica de mostrar la promoción
+function manejarPromocion(boton, promocion) {
+  boton.addEventListener("click", function() {
+    mostrarPromocion(promocion);
+  });
+}
+
 // Obtener los botones de las promociones
 var botonPromocion1 = document.getElementById("boton-promocion1");
 var botonPromocion2 = document.getElementById("boton-promocion2");
 
-// Agregar eventos de clic a los botones para mostrar la información de la promoción correspondiente
-botonPromocion1.addEventListener("click", function() {
-  mostrarPromocion(promocion1);
-});
+// Ejecutar la lógica para manejar cada botón y su respectiva promoción
+manejarPromocion(botonPromocion1, promocion1);
+manejarPromocion(botonPromocion2, promocion2);
 
-botonPromocion2.addEventListener("click", function() {
-  mostrarPromocion(promocion2);
-});
+console.log( new Date() );
+
+//----------------------------
+
+
+
+//--------------------
