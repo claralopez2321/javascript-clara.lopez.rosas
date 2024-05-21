@@ -132,8 +132,6 @@ manejarPromocion(botonPromocion2, promocion2);
 
 console.log( new Date() );
 
-//----------------------------
-
-
 
 //--------------------
+
