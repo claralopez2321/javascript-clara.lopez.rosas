@@ -12,6 +12,10 @@
 
 
 // While
+//---------- Saludo inicial
+
+
+//----------------
 
 // Obtener el elemento h1 mediante getElementsByClassName
 const titulo = document.getElementsByClassName('titulo1')[0];
@@ -29,68 +33,121 @@ function animarTitulo() {
 // Llamar a la función animarTitulo() cada 1 segundo
 setInterval(animarTitulo, 1000);
 
-//------------------------------------
+
+//---------------------
 
 
+// Función para saludar al usuario por su nombre
+function saludarPorNombre() {
+  // Solicitar al usuario que ingrese su nombre
+  const nombre = prompt("Por favor, ingresa tu nombre:");
 
-//------------------ pedir nombre y mostrarlo
+  // Verificar si el usuario ingresó un nombre
+  if (nombre !== null) {
+    // Verificar si el nombre no está vacío
+    if (nombre.trim() !== "") {
+      // Mostrar el saludo con el nombre del usuario en una ventana emergente
+      alert(`¡Hola, ${nombre.trim()}! Bienvenido a ForeverFramed`);
 
-function saludoinicial(nombre) {
-  alert("Hola " + nombre + " elije el plan para tí!");
+      // Mostrar el saludo con el nombre del usuario en la consola del navegador
+      console.log(`¡Hola, ${nombre.trim()}! Bienvenido a ForeverFramed`);
+    } else {
+      // Mostrar un saludo genérico en una ventana emergente si el usuario no ingresó un nombre
+      alert("¡Hola! Bienvenido a ForeverFramed");
+
+      // Mostrar un saludo genérico en la consola del navegador
+      console.log("¡Hola! Bienvenido a ForeverFramed");
+    }
+  }
 }
 
-let nombreIngresado;
-do {
-  nombreIngresado = prompt("Ingresá tu nombre, crack");
-  console.log(nombreIngresado); // Agrega esta línea para verificar el valor de nombreIngresado
-} while (!nombreIngresado || nombreIngresado === "Escribe tu nombre");
+// Llamar a la función para saludar al usuario por su nombre
+saludarPorNombre();
 
-saludoinicial(nombreIngresado);
+//---------------array productos
 
+const items = [
+  { name: "Viajes inolvidables", description: "Viajes de todo tipo, recuerdos para siempre.", price: 10 },
+  { name: "Fiestas únicas", description: "Bodas, cumpleaños, aniversarios.", price: 15 },
+  { name: "Días para recordar", description: "Bautizos, graduaciones, eventos.", price: 20 },
+];
+
+// Función para saludar al cargar la página
+function saludoinicial() {
+  console.log("Bienvenido a ForeverFramed");
+}
+
+// Función para buscar elementos
+function buscar() {
+  const input = document.getElementById('searchBar').value.toLowerCase();
+  const resultados = items.filter(item => item.name.toLowerCase().includes(input));
+  mostrarResultados(resultados);
+}
+
+// Función para mostrar los resultados de búsqueda
+function mostrarResultados(resultados) {
+  const resultadosDiv = document.getElementById('resultados');
+  resultadosDiv.innerHTML = ''; // Limpiar resultados anteriores
+  resultados.forEach(item => {
+      const div = document.createElement('div');
+      div.classList.add('result-item');
+      div.innerHTML = `<h5>${item.name}</h5><p>${item.description}</p><p>Precio: $${item.price} USD</p>`;
+      resultadosDiv.appendChild(div);
+  });
+}
 
 //---------------
-// Función para manejar el clic en un botón de producto
-function handleProductClick(price) {
-  // Sumar el precio al total
-  total += price;
+// Array para almacenar los elementos del carrito
+const carrito = [];
 
-  // Mostrar el mensaje de alerta con el total actualizado
-  showAlert(total);
+// Función para agregar un producto al carrito
+function agregarAlCarrito(precio) {
+  // Agregar el precio al carrito
+  carrito.push(precio);
+  
+  // Actualizar la interfaz de usuario
+  mostrarCarrito();
 }
 
-// Variable para almacenar el total del pedido
-var total = 0;
+// Función para mostrar los elementos del carrito y el total en una ventana emergente y en la consola
+function mostrarCarrito() {
+  const total = carrito.reduce((acc, precio) => acc + precio, 0);
+  const mensaje = `Elementos en el carrito: ${carrito.length}\nTotal: $${total} USD`;
 
-// Obtener todos los botones por su clase y agregar evento de clic
-var buttons = document.querySelectorAll('.btn.btn-primary.bg-warning');
+  // Mostrar en ventana emergente
+  alert(mensaje);
 
-// Iterar sobre cada botón y agregar un evento de clic
-buttons.forEach(function(button) {
-  button.addEventListener('click', function() {
-    // Obtener el precio del botón
-    var buttonText = this.textContent.trim();
-    var price = parseFloat(buttonText.split(' ')[2]);
-    // Llamar a la función para manejar el clic en el botón
-    handleProductClick(price);
-  });
-});
-
-// Función para mostrar el mensaje de alerta con el precio
-function showAlert(total) {
-  alert("El total de tu pedido es " + total + " USD");
+  // Mostrar en la consola
+  console.log(mensaje);
 }
 
 // Función para limpiar el carrito
 function limpiarCarrito() {
-  total = 0;
-  showAlert(total); // Mostrar un mensaje indicando que el carrito ha sido limpiado
+  // Vaciar el array del carrito
+  carrito.length = 0;
+
+  // Actualizar la interfaz de usuario
+  mostrarCarrito();
 }
 
 // Obtener el botón de limpiar carrito por su ID
-var btnLimpiarCarrito = document.getElementById('limpiar-carrito');
+const btnLimpiarCarrito = document.getElementById('limpiar-carrito');
 
 // Agregar evento de clic al botón de limpiar carrito
 btnLimpiarCarrito.addEventListener('click', limpiarCarrito);
+
+// Obtener todos los botones de agregar al carrito por su clase y agregar evento de clic
+const botonesAgregarCarrito = document.querySelectorAll('.btn.btn-primary.bg-warning');
+
+botonesAgregarCarrito.forEach(function(boton) {
+  boton.addEventListener('click', function() {
+    // Obtener el precio del botón
+    const precio = parseFloat(this.textContent.trim().split(' ')[2]);
+    // Llamar a la función para agregar al carrito
+    agregarAlCarrito(precio);
+  });
+});
+
 //----------------------------------
 
 // Definir objetos para representar promociones de servicios
@@ -134,4 +191,6 @@ console.log( new Date() );
 
 
 //--------------------
+
+
 

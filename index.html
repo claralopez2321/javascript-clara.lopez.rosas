@@ -14,6 +14,7 @@
     <meta name="description" content="¡Captura tus momentos más preciados y conviértelos en recuerdos eternos con ForeverFramed.com! Expertos en transformar tus eventos especiales en obras de arte digital.">
     <meta name="keywords" content="ForeverFramed, recuerdos, momentos, arte digital, eventos especiales">
     <!-- Fin de meta etiquetas para SEO -->
+    
 
 </head>
 
@@ -46,7 +47,14 @@
             </div>
         </nav>
     </header>
-             
+    
+    <!-- Barra de búsqueda -->
+     <section class="container text-center section-montserrat d-flex flex-column justify-content-center align-items-center">
+        <h2>Busca tus recuerdos</h2>
+        <input type="text" id="searchBar" oninput="buscar()" placeholder="Buscar recuerdos...">
+        <div id="resultados"></div>
+    </section>
+
     <div>
         <section class="seccion1">
             <img src="./assets/Imagenes/fotospolaroid-16.png" alt="imagen-framed" id="imagen2-seccion1">
@@ -57,7 +65,7 @@
         </section>
     </div>
 
-    <section id="custom-section" class="container text-center section-montserrat d-flex flex-column justify-content-center align-items-center"> 
+    <section id="custom-section" class="container text-center section-montserrat d-flex flex-column justify-content-center align-items-center">
         <h1>Tus recuerdos, como nunca antes</h1>
         <div class="row">
             <div class="col-md-4">
@@ -82,7 +90,6 @@
                 </div>
             </div>
         </div>
-       
         <button id="limpiar-carrito" class="btn btn-danger">Limpiar Carrito</button>
     </section>
 
