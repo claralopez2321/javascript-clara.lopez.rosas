@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,9 +14,8 @@
     <!-- Meta etiquetas para SEO -->
     <meta name="description" content="¡Captura tus momentos más preciados y conviértelos en recuerdos eternos con ForeverFramed.com! Expertos en transformar tus eventos especiales en obras de arte digital.">
     <meta name="keywords" content="ForeverFramed, recuerdos, momentos, arte digital, eventos especiales">
-    <!-- Fin de meta etiquetas para SEO -->
-    
-
+    <!-- Sweet Alert libreria -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body onload="saludoinicial()">
@@ -23,7 +23,7 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/index.html">
-                    <img src="./assets/Imagenes/logo02.png" alt="Logo" style="width: 80px; height: auto;"> 
+                    <img src="./assets/Imagenes/logo02.png" alt="Logo" style="width: 80px; height: auto;">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -31,7 +31,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active"  href="#servicios">Servicios</a>
+                            <a class="nav-link active" href="#servicios">Servicios</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#proyectos">Proyectos</a>
@@ -47,123 +47,143 @@
             </div>
         </nav>
     </header>
-    
-    <!-- Barra de búsqueda -->
-     <section class="container text-center section-montserrat d-flex flex-column justify-content-center align-items-center">
-        <h2>Busca tus recuerdos</h2>
-        <input type="text" id="searchBar" oninput="buscar()" placeholder="Buscar recuerdos...">
+
+    <section class="container text-center section-montserrat d-flex flex-column justify-content-center align-items-center">
+        <h2>Busca el plan perfecto para tus recuerdos</h2>
+        <input type="text" id="searchBar" placeholder="Intenta buscar tu Plan...">
+        <button id="botonBuscar">Buscar</button>
         <div id="resultados"></div>
     </section>
 
-    <div>
-        <section class="seccion1">
-            <img src="./assets/Imagenes/fotospolaroid-16.png" alt="imagen-framed" id="imagen2-seccion1">
-            <img src="./assets/Imagenes/logos04.png" alt="logo-framed" id="imagen-seccion1">
-            <h1 class="titulo1">Inmortaliza tus momentos</h1>
-            <h2 class="subtitulo1">Y compártelos con todos</h2> 
-            <p id="parrafo1">¡Captura tus momentos más preciados y conviértelos en recuerdos eternos con ForeverFramed.com! Expertos en transformar tus eventos especiales en obras de arte digital, estamos aquí para asegurarnos de que cada momento importante de tu vida brille en la pantalla. Descubre la magia de inmortalizar tus recuerdos con nosotros.</p>
-        </section>
-    </div>
+    <section class="seccion1">
+        <img src="./assets/Imagenes/fotospolaroid-16.png" alt="imagen-framed" id="imagen2-seccion1" onmouseover="iniciarAnimacion(this)" onmouseleave="detenerAnimacion(this)">
+        <img src="./assets/Imagenes/logos04.png" alt="logo-framed" id="imagen-seccion1">
+        <h1 class="titulo1">Inmortaliza tus momentos</h1>
+        <h2 class="subtitulo1">Y compártelos con todos</h2>
+        <p id="parrafo1">¡Captura tus momentos más preciados y conviértelos en recuerdos eternos con ForeverFramed.com! Expertos en transformar tus eventos especiales en obras de arte digital, estamos aquí para asegurarnos de que cada momento importante de tu vida brille en la pantalla. Descubre la magia de inmortalizar tus recuerdos con nosotros.</p>
+    </section>
+
+    <section class="sorteo-container">
+        <h2>Sorteo</h2>
+        <p>Ingresa un número entre 1 y 100:</p>
+        <input type="number" id="userNumber">
+        <button onclick="realizarSorteo()">Participar en el Sorteo</button>
+        <div id="resultadoSorteo"></div>
+    </section>
 
     <section id="custom-section" class="container text-center section-montserrat d-flex flex-column justify-content-center align-items-center">
         <h1>Tus recuerdos, como nunca antes</h1>
         <div class="row">
             <div class="col-md-4">
                 <div class="custom-div">
-                    <h5>Viajes inolvidables</h5>
+                    <h5 id="producto1">Viajes inolvidables</h5>
                     <p>Viajes de todo tipo, recuerdos para siempre.</p>
-                    <button class="btn btn-primary  bg-warning">Obtenlo por 10 usd</button>
+                    <button class="btn btn-primary bg-warning">Obtenlo por 10 usd</button>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="custom-div">
-                    <h5>Fiestas únicas</h5>
+                    <h5 id="producto2">Fiestas únicas</h5>
                     <p>Bodas, cumpleaños, aniversarios.</p>
-                    <button class="btn btn-primary  bg-warning">Obtenlo por 15 usd</button>
+                    <button class="btn btn-primary bg-warning">Obtenlo por 15 usd</button>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="custom-div">
-                    <h5>Días para recordar</h5>
+                    <h5 id="producto3">Días para recordar</h5>
                     <p>Bautizos, graduaciones, eventos.</p>
                     <button class="btn btn-primary bg-warning">Obtenlo por 20 usd</button>
                 </div>
             </div>
         </div>
-        <button id="limpiar-carrito" class="btn btn-danger">Limpiar Carrito</button>
     </section>
+
+    <aside id="carrito-lateral" class="carrito-lateral">
+        <span id="cerrar-carrito" class="cerrar-carrito">&times;</span>
+        <h2>Carrito de Compras</h2>
+        <ul id="lista-carrito"></ul>
+        <p id="total-carrito"></p>
+        <button id="limpiar-carrito" class="btn btn-danger">Limpiar Carrito</button>
+        <button id="comprar" class="btn btn-success">Comprar</button>
+    </aside>
 
     <div class="seccion2-home">
         <section>
             <h3 class="titulo3-home" id="servicios">Nuestros servicios</h3>
             <p class="parrafoh4-home">¡Captura tus momentos más preciados y conviértelos en recuerdos eternos con ForeverFramed.com! Expertos en transformar tus eventos especiales en obras de arte digital, estamos aquí para asegurarnos de que cada momento importante de tu vida brille en la pantalla. Descubre la magia de inmortalizar tus recuerdos con nosotros.</p>
             <img src="./assets/Imagenes/imagenbanner2home.jpg" alt="pareja-home2">
-            <a href="./paginas/contacto.html" class="boton-contacto2">Contacto</a>
+            <a href="./paginas/contacto.html" class="btn btn-warning btn-sm d-flex justify-content-center align-items-center" style="width: 206px; height: 68px; line-height: 32px; font-size: 20px; margin: 60px;">Contacto</a>
         </section>
     </div>
-    <div>
-        <section class="seccion2-servicios">
+
+    <div class="seccion2-servicios">
+        <section>
             <h3>Nuestros servicios</h3>
             <p>¡Capturamos tus momentos más preciados y conviértelos en recuerdos eternos con ForeverFramed.com! Expertos en transformar tus eventos especiales en obras de arte digital, estamos aquí para asegurarnos de que cada momento importante de tu vida brille en la pantalla. Descubre la magia de inmortalizar tus recuerdos con nosotros.</p>
             <ul class="lista-iconos">
                 <li><i class="fas fa-camera"></i> Edición de fotografías.</li>
                 <li><i class="fas fa-pen-alt"></i> Diseño de logotipo identificador.</li>
-                <li><i class="fas fa-book"></i> Diseño y desarrollo de Book de fotos Digital .</li>
+                <li><i class="fas fa-book"></i> Diseño y desarrollo de Book de fotos Digital.</li>
             </ul>
-            
-            <button id="boton-promocion1" class="boton-contacto2">Ver promoción 1</button>
-            <button id="boton-promocion2" class="boton-contacto3">Ver promoción 2</button>
+            <hr class="my-5">
+            <div class="d-flex justify-content-between">
+                <button id="boton-promocion1" class="boton-contacto2">Ver promoción 1</button>
+                <button id="boton-promocion2" class="boton-contacto3">Ver promoción 2</button>
+                <button id="boton-promocion3" id="boton-contacto4">¡Promoción para México!</button>
+            </div>
         </section>
-    <div>
-    
-        <div class="container-proyectos d-flex justify-content-center align-items-center">
-            <div class="row justify-content-center">
-                <h3 class="text-center" id="proyectos">
-                    Hecha una mirada a estos proyectos
-                </h3>
-                <div class="col-md-3">
-                    <div class="text-center">
-                        <a href="./paginas/bodamartinymica.html">
-                            <img src="./assets/Imagenes/fotos.proyectos-18.png" class="rounded img-fluid" alt="Imagen 1">
-                        </a>
-                    </div>
+    </div>
+
+    <div class="container-proyectos d-flex justify-content-center align-items-center">
+        <div class="row justify-content-center">
+            <h3 class="text-center" id="proyectos">
+                Hecha una mirada a estos proyectos
+            </h3>
+            <div class="col-md-3">
+                <div class="text-center">
+                    <a href="./paginas/bodamartinymica.html">
+                        <img src="./assets/Imagenes/fotos.proyectos-18.png" class="rounded img-fluid" alt="Imagen 1">
+                    </a>
                 </div>
-                <div class="col-md-3">
-                    <div class="text-center">
-                        <a href="pagina.html">
-                            <img src="./assets/Imagenes/fotos.proyectos-19.png" class="rounded img-fluid" alt="Imagen 2">
-                        </a>
-                    </div>
+            </div>
+            <div class="col-md-3">
+                <div class="text-center">
+                    <a href="pagina.html">
+                        <img src="./assets/Imagenes/fotos.proyectos-19.png" class="rounded img-fluid" alt="Imagen 2">
+                    </a>
                 </div>
-                <div class="col-md-3">
-                    <div class="text-center">
-                        <a href="otra_pagina.html">
-                            <img src="./assets/Imagenes/fotos.proyectos-20.png" class="rounded img-fluid" alt="Imagen 3">
-                        </a>
-                    </div>
+            </div>
+            <div class="col-md-3">
+                <div class="text-center">
+                    <a href="otra_pagina.html">
+                        <img src="./assets/Imagenes/fotos.proyectos-20.png" class="rounded img-fluid" alt="Imagen 3">
+                    </a>
                 </div>
-                <div class="col-md-3">
-                    <div class="text-center">
-                        <a href="una_mas.html">
-                            <img src="./assets/Imagenes/fotos.proyectos-21.png" class="rounded img-fluid" alt="Imagen 4">
-                        </a>
-                    </div>
+            </div>
+            <div class="col-md-3">
+                <div class="text-center">
+                    <a href="una_mas.html">
+                        <img src="./assets/Imagenes/fotos.proyectos-21.png" class="rounded img-fluid" alt="Imagen 4">
+                    </a>
                 </div>
             </div>
         </div>
-    <div class="sec-historia-2" id="tuhistoria">
-            <section>
-                <h3>Ahora es tu turno: Enmarca tus recuerdos para siempre</h3>
-                <iframe class="video-seccion2-tuhistoria" src="https://www.youtube.com/embed/r6DzaGChCEc" frameborder="0" allowfullscreen></iframe>
-                <h4 class="titulo-seccion2-historia">Sigue estos pasos y comencemos la aventura</h4>
-                <ul class="lista-tuhistoria"> 
-                    <li><i class="fas fa-box"></i> Elige tu paquete</li>
-                    <li><i class="fas fa-palette"></i> Elige el estilo que quieras</li>
-                    <li><i class="fas fa-envelope"></i> Envía tus datos y fotos</li>
-                </ul>
-                <a href="contacto.html" class="btn btn-warning btn-sm align-center">Comenzar ahora</a>        </section>
     </div>
-    
+
+    <div class="sec-historia-2" id="tuhistoria">
+        <section>
+            <h3>Ahora es tu turno: Enmarca tus recuerdos para siempre</h3>
+            <iframe class="video-seccion2-tuhistoria" src="https://www.youtube.com/embed/r6DzaGChCEc" frameborder="0" allowfullscreen></iframe>
+            <h4 class="titulo-seccion2-historia">Sigue estos pasos y comencemos la aventura</h4>
+            <ul class="lista-tuhistoria">
+                <li><i class="fas fa-box"></i> Elige tu paquete</li>
+                <li><i class="fas fa-palette"></i> Elige el estilo que quieras</li>
+                <li><i class="fas fa-envelope"></i> Envía tus datos y fotos</li>
+            </ul>
+            <a href="contacto.html" class="btn btn-warning btn-sm align-center">Comenzar ahora</a>
+        </section>
+    </div>
+
     <footer>
         <div class="logo-footer">
             <img src="../assets/Imagenes/logotransparenteparafondonegro.png" alt="Logo footer">
@@ -171,14 +191,15 @@
         <div>
             <ul class="lista-contacto-footer">
                 <li><i class="fas fa-phone"></i> 342 446 4476</li>
-                <li><i class="fas fa-envelope"></i> lopezrosasclara@gmail</li>
+                <li><i class="fas fa-envelope"></i> lopezrosasclara@gmail.com</li>
             </ul>
         </div>
     </footer>
     <!-- Bootstrap JS -->
     <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/main.js"></script>
     <script src="ruta/a/language.js"></script>
-
 </body>
+
 </html>
