@@ -28,18 +28,6 @@ setInterval(animarTitulo, 1000);
 
 //---------------------
 
-// Función para saludar al usuario por su nombre
-const saludarPorNombre = () => {
-  const nombre = prompt("Por favor, ingresa tu nombre:")?.trim();
-  const mensaje = nombre ? `¡Hola, ${nombre}! Bienvenido a ForeverFramed` : "¡Hola! Bienvenido a ForeverFramed";
-  alert(mensaje);
-  console.log(mensaje);
-};
-
-// Llamar a la función para saludar al usuario por su nombre
-saludarPorNombre();
-
-
 // Array para almacenar los elementos del carrito
 let carrito = [];
 
@@ -124,28 +112,43 @@ btnComprar.addEventListener('click', () => {
 });
 //----------------------------------
 
-// Definir objetos para representar promociones de servicios
 const promocion1 = {
   titulo: "Promoción 1",
-  descripcion: "¡Aprovecha nuestra oferta especial de edición de fotografías! Transforma tus imágenes en obras de arte digitales por un precio increíble.",
+  descripcion: "¡Aprovecha nuestra oferta especial de edición de fotografías! ¡Transforma tus imágenes en obras de arte digitales por 50 usd!.",
   precio: 50
 };
 
 const promocion2 = {
   titulo: "Promoción 2",
-  descripcion: "¿Necesitas un logotipo único y memorable para tu negocio? Con nuestra promoción especial de diseño de logotipo, obtén un diseño profesional a un precio accesible.",
+  descripcion: "¿Necesitas un logotipo único y memorable para tu negocio? Con nuestra promoción especial de diseño de logotipo, obtén un diseño profesional por solo 100 USD.",
   precio: 100
+};
+
+// Función para mostrar la promoción en SweetAlert2
+const mostrarPromocion = (promocion) => {
+  Swal.fire({
+    title: promocion.titulo,
+    text: promocion.descripcion,
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonText: 'Agregar al carrito',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      agregarPromocionAlCarrito(promocion);
+    }
+  });
 };
 
 // Función para agregar promociones al carrito
 const agregarPromocionAlCarrito = (promocion) => {
   const descripcion = `${promocion.titulo}: ${promocion.descripcion}`;
-  agregarAlCarrito(promocion.precio, descripcion);
+  agregarAlCarrito(promocion.precio, descripcion); // Asegúrate de tener esta función definida en tu código
 };
 
 // Función para manejar la lógica de mostrar la promoción
 const manejarPromocion = (boton, promocion) => {
-  boton.addEventListener("click", () => agregarPromocionAlCarrito(promocion));
+  boton.addEventListener("click", () => mostrarPromocion(promocion));
 };
 
 // Obtener los botones de las promociones
@@ -156,7 +159,9 @@ const botonPromocion2 = document.getElementById("boton-promocion2");
 manejarPromocion(botonPromocion1, promocion1);
 manejarPromocion(botonPromocion2, promocion2);
 
-//---------
+
+//---------Mostrar carrito
+
 
 
 
@@ -179,47 +184,56 @@ function realizarSorteo() {
   }
 }
 
-//---- barra busqueda
+const productos = [
+  { nombre: "Viajes inolvidables", precio: 10 },
+  { nombre: "Fiestas únicas", precio: 15 },
+  { nombre: "Días para recordar", precio: 20 },
+];
 
-
-// Función para realizar la búsqueda
-const buscar = () => {
-  const input = document.getElementById("searchBar");
-  const query = input.value.toLowerCase();
+// Función para mostrar productos
+const mostrarProductos = (productosAMostrar) => {
   const resultados = document.getElementById("resultados");
   resultados.innerHTML = "";
 
-  // Si la consulta está vacía, no hacer nada
-  if (query === "") {
-    return; // Salir de la función
-  }
-
-  // Buscar productos que coincidan con la consulta
-  const productosCoincidentes = [
-    { nombre: "Viajes inolvidables", precio: 10 },
-    { nombre: "Fiestas únicas", precio: 15 },
-    { nombre: "Días para recordar", precio: 20 },
-  ].filter((producto) => producto.nombre.toLowerCase().includes(query));
-
-  // Mostrar los resultados de la búsqueda
-  productosCoincidentes.forEach((producto) => {
-    const elemento = document.createElement("p");
-    elemento.textContent = `Producto: ${producto.nombre}, Precio: $${producto.precio} USD`;
-    resultados.appendChild(elemento);
+  productosAMostrar.forEach((producto) => {
+      const elemento = document.createElement("p");
+      elemento.textContent = `Producto: ${producto.nombre}, Precio: $${producto.precio} USD`;
+      resultados.appendChild(elemento);
   });
 
-  if (productosCoincidentes.length === 0) {
-    const mensaje = document.createElement("p");
-    mensaje.textContent = "No se encontraron resultados.";
-    resultados.appendChild(mensaje);
+  if (productosAMostrar.length === 0) {
+      const mensaje = document.createElement("p");
+      mensaje.textContent = "No se encontraron resultados.";
+      resultados.appendChild(mensaje);
   }
 };
 
-document.addEventListener("DOMContentLoaded", function() {
-  // Asociar la función buscar al evento de clic en el input de búsqueda
-  document.getElementById("searchBar").addEventListener("focus", buscar);
-});
+// Función para realizar la búsqueda
 
+const buscar = () => {
+  const input = document.getElementById("searchBar");
+  const query = input.value.toLowerCase();
+
+  const productosCoincidentes = productos.filter((producto) => 
+      producto.nombre.toLowerCase().includes(query)
+  );
+
+  mostrarProductos(productosCoincidentes);
+};
+
+document.addEventListener("DOMContentLoaded", function() {
+  const searchBar = document.getElementById("searchBar");
+  const botonBuscar = document.getElementById("botonBuscar");
+
+  // Mostrar todos los productos cuando el usuario pone el cursor en el input
+  searchBar.addEventListener("focus", () => mostrarProductos(productos));
+
+  // Asociar la función buscar al evento de entrada en el input de búsqueda
+  searchBar.addEventListener("input", buscar);
+
+  // Asociar la función buscar al evento de clic en el botón de búsqueda
+  botonBuscar.addEventListener("click", buscar);
+});
 //----------- Sweet alert
 
 // Variable para verificar si la promoción ya se aplicó
