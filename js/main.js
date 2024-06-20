@@ -1,22 +1,3 @@
-//? condicional
-
-//*     ==              Es igual
-//*     !=              Es distinto
-//*     <               Es menor
-//*     >               Es mayor 
-//*     <=              Es menor o igual
-//*     >=              Es mayor o igual
-//*     && AND
-//*     || OR
-
-
-
-// While
-//---------- Saludo inicial
-
-
-//----------------
-
 // Obtener el elemento h1 mediante getElementsByClassName
 const [titulo] = document.getElementsByClassName('titulo1');
 
@@ -26,15 +7,18 @@ const animarTitulo = () => titulo.style.color = titulo.style.color === 'blue' ? 
 // Llamar a la función animarTitulo() cada 1 segundo
 setInterval(animarTitulo, 1000);
 
-//---------------------
-
 // Array para almacenar los elementos del carrito
-let carrito = [];
+let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+// Función para guardar el carrito en LocalStorage
+const guardarCarritoEnLocalStorage = () => {
+  localStorage.setItem('carrito', JSON.stringify(carrito));
+};
 
 // Función para agregar un producto al carrito
 const agregarAlCarrito = (precio, descripcion) => {
-  // Usar el operador de propagación para crear un nuevo array con el nuevo precio
-  carrito = [...carrito, {precio, descripcion}];
+  carrito = [...carrito, { precio, descripcion }];
+  guardarCarritoEnLocalStorage();
   mostrarCarrito();
   abrirCarrito();
 };
@@ -43,7 +27,7 @@ const agregarAlCarrito = (precio, descripcion) => {
 const mostrarCarrito = () => {
   const listaCarrito = document.getElementById('lista-carrito');
   const totalCarrito = document.getElementById('total-carrito');
-  
+
   // Limpiar la lista actual
   listaCarrito.innerHTML = '';
 
@@ -62,6 +46,7 @@ const mostrarCarrito = () => {
 // Función para limpiar el carrito
 const limpiarCarrito = () => {
   carrito = [];
+  guardarCarritoEnLocalStorage();
   mostrarCarrito();
 };
 
@@ -97,19 +82,6 @@ document.querySelectorAll('.btn.btn-primary.bg-warning').forEach(boton => {
   });
 });
 
-// Obtener el botón de comprar por su ID y agregar evento de clic
-const btnComprar = document.getElementById('comprar');
-
-btnComprar.addEventListener('click', () => {
-  if (carrito.length > 0) {
-    alert('Gracias por su compra!');
-    carrito = [];
-    mostrarCarrito();
-    cerrarCarrito();
-  } else {
-    alert('El carrito está vacío.');
-  }
-});
 //----------------------------------
 
 const promocion1 = {
@@ -143,7 +115,7 @@ const mostrarPromocion = (promocion) => {
 // Función para agregar promociones al carrito
 const agregarPromocionAlCarrito = (promocion) => {
   const descripcion = `${promocion.titulo}: ${promocion.descripcion}`;
-  agregarAlCarrito(promocion.precio, descripcion); // Asegúrate de tener esta función definida en tu código
+  agregarAlCarrito(promocion.precio, descripcion);
 };
 
 // Función para manejar la lógica de mostrar la promoción
@@ -158,12 +130,6 @@ const botonPromocion2 = document.getElementById("boton-promocion2");
 // Ejecutar la lógica para manejar cada botón y su respectiva promoción
 manejarPromocion(botonPromocion1, promocion1);
 manejarPromocion(botonPromocion2, promocion2);
-
-
-//---------Mostrar carrito
-
-
-
 
 //----sorteo
 
@@ -234,51 +200,105 @@ document.addEventListener("DOMContentLoaded", function() {
   // Asociar la función buscar al evento de clic en el botón de búsqueda
   botonBuscar.addEventListener("click", buscar);
 });
-//----------- Sweet alert
 
-// Variable para verificar si la promoción ya se aplicó
-let promocionAplicada = false;
+//----------- Sweet alert btn comprar
 
-// Función para aplicar un descuento del 50% al carrito
-const aplicarDescuento = () => {
-  // Verificar si la promoción ya se aplicó
-  if (!promocionAplicada) {
-    // Iterar sobre cada producto en el carrito
-    carrito.forEach(producto => {
-      // Calcular el descuento del 50% para el precio actual del producto
-      const descuento = producto.precio * 0.5;
-      // Restar el descuento al precio del producto
-      producto.precio -= descuento;
-    });
-    // Establecer la bandera promocionAplicada como true
-    promocionAplicada = true;
-  }
-};
 
-// SweetAlert para el botón de promoción 3
-document.getElementById("boton-promocion3").addEventListener("click", () => {
-  // Verificar si la promoción ya se aplicó
-  if (!promocionAplicada) {
+// Obtener el botón de comprar por su ID y agregar evento de clic
+const btnComprar = document.getElementById('comprar');
+
+btnComprar.addEventListener('click', () => {
+  if (carrito.length > 0) {
     Swal.fire({
-      title: 'Promoción 3',
-      text: 'Si eres de México tienes un 50% de descuento en tu compra final',
-      icon: 'info',
-      confirmButtonText: '<i class="fas fa-flag"></i> Soy de México ¡Quiero este beneficio!',
-      confirmButtonColor: '#FFA500', // Naranja
-      showCancelButton: true,
-      cancelButtonText: 'Cancelar'
+      title: 'Gracias por su compra!',
+      html: `
+        <input type="email" id="email" class="swal2-input" placeholder="Introduce tu email">
+        <p>Introduce tu email para mandar tu factura y para que nuestros diseñadores comiencen a trabajar contigo.</p>
+      `,
+      confirmButtonText: 'Enviar',
+      showCancelButton: false,
+      showCloseButton: true,
+      showLoaderOnConfirm: true,
+      preConfirm: () => {
+        const email = document.getElementById('email').value;
+        // Aquí puedes manejar el email (enviarlo a un servidor, etc.)
+        // Por ahora solo mostraremos un mensaje con el email ingresado
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve();
+          }, 2000); // Simular una operación asincrónica
+        });
+      }
     }).then((result) => {
       if (result.isConfirmed) {
-        // Aplicar descuento al carrito
-        aplicarDescuento();
-        // Mostrar mensaje de éxito
-        Swal.fire('¡Descuento aplicado!', 'Se ha aplicado un 50% de descuento a tu carrito.', 'success');
-        // Actualizar la visualización del carrito
+        const email = document.getElementById('email').value;
+        // Aquí puedes continuar con lo que necesites hacer con el email
+        Swal.fire({
+          title: 'Gracias!',
+          html: `Hemos enviado la factura a <strong>${email}</strong>.`,
+          icon: 'success'
+        });
+        // Limpiar carrito después de la compra
+        carrito = [];
+        guardarCarritoEnLocalStorage();
         mostrarCarrito();
+        cerrarCarrito();
       }
     });
   } else {
-    // Si la promoción ya se aplicó, mostrar un mensaje indicando que ya se utilizó
-    Swal.fire('Promoción ya utilizada', 'Esta promoción ya ha sido aplicada en tu carrito.', 'info');
+    Swal.fire('El carrito está vacío.', '', 'error');
+  }
+});
+
+// Mostrar carrito al cargar la página
+document.addEventListener("DOMContentLoaded", mostrarCarrito);
+
+
+//noticiAS
+
+document.addEventListener('DOMContentLoaded', function() {
+  const noticiasContainer = document.getElementById('noticias-container');
+
+  // URL de la API de noticias (reemplaza con tu propia URL)
+  const apiKey = 'ee448611893848f39d508fad6c4f8f3f';
+  const apiUrl = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
+
+  // Realizar solicitud a la API de noticias
+  fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+          let noticias = data.articles.slice(0, 3); // Tomar solo las primeras 3 noticias
+
+          // Reorganizar aleatoriamente las noticias
+          noticias = shuffleArray(noticias);
+
+          // Construir las tarjetas de noticias
+          noticias.forEach(noticia => {
+              const noticiaCard = `
+                  <div class="col-md-4">
+                      <div class="card noticia-card">
+                          <img src="${noticia.urlToImage}" class="card-img-top" alt="Imagen de la noticia">
+                          <div class="card-body">
+                              <h5 class="card-title">${noticia.title}</h5>
+                              <p class="card-text">${noticia.description}</p>
+                              <a href="${noticia.url}" target="_blank" class="btn btn-primary">Leer más</a>
+                          </div>
+                      </div>
+                  </div>
+              `;
+              noticiasContainer.innerHTML += noticiaCard;
+          });
+      })
+      .catch(error => {
+          console.error('Error al obtener noticias:', error);
+      });
+
+  // Función para reordenar aleatoriamente un array (Algoritmo de Fisher-Yates)
+  function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
   }
 });
