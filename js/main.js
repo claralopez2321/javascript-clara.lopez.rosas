@@ -11,9 +11,7 @@ setInterval(animarTitulo, 1000);
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
 // Función para guardar el carrito en LocalStorage
-const guardarCarritoEnLocalStorage = () => {
-  localStorage.setItem('carrito', JSON.stringify(carrito));
-};
+const guardarCarritoEnLocalStorage = () => localStorage.setItem('carrito', JSON.stringify(carrito));
 
 // Función para agregar un producto al carrito
 const agregarAlCarrito = (precio, descripcion) => {
@@ -32,7 +30,7 @@ const mostrarCarrito = () => {
   listaCarrito.innerHTML = '';
 
   // Agregar cada elemento del carrito a la lista
-  carrito.forEach((item, index) => {
+  carrito.forEach(item => {
     const li = document.createElement('li');
     li.textContent = `${item.descripcion}: $${item.precio} USD`;
     listaCarrito.appendChild(li);
@@ -51,42 +49,29 @@ const limpiarCarrito = () => {
 };
 
 // Función para abrir el carrito
-const abrirCarrito = () => {
-  document.getElementById('carrito-lateral').classList.add('visible');
-};
+const abrirCarrito = () => document.getElementById('carrito-lateral').classList.add('visible');
 
 // Función para cerrar el carrito
-const cerrarCarrito = () => {
-  document.getElementById('carrito-lateral').classList.remove('visible');
-};
+const cerrarCarrito = () => document.getElementById('carrito-lateral').classList.remove('visible');
 
-// Obtener el botón de limpiar carrito por su ID
-const btnLimpiarCarrito = document.getElementById('limpiar-carrito');
+// Obtener el botón de limpiar carrito por su ID y agregar evento de clic
+document.getElementById('limpiar-carrito').addEventListener('click', limpiarCarrito);
 
-// Agregar evento de clic al botón de limpiar carrito
-btnLimpiarCarrito.addEventListener('click', limpiarCarrito);
+// Obtener el botón de cerrar carrito por su ID y agregar evento de clic
+document.getElementById('cerrar-carrito').addEventListener('click', cerrarCarrito);
 
-// Obtener el botón de cerrar carrito por su ID
-const btnCerrarCarrito = document.getElementById('cerrar-carrito');
-
-// Agregar evento de clic al botón de cerrar carrito
-btnCerrarCarrito.addEventListener('click', cerrarCarrito);
-
-// Obtener el botón de abrir carrito por su ID
-const carritoButton = document.getElementById('carrito-button');
-
-// Agregar evento de clic al botón de abrir carrito
-carritoButton.addEventListener('click', abrirCarrito);
+// Obtener el botón de abrir carrito por su ID y agregar evento de clic
+document.getElementById('carrito-button').addEventListener('click', abrirCarrito);
 
 // Obtener todos los botones de agregar al carrito por su clase y agregar evento de clic
 document.querySelectorAll('.btn.btn-primary.bg-warning').forEach(boton => {
   boton.addEventListener('click', () => {
-    const textoBoton = boton.textContent.trim();
-    const precio = parseFloat(textoBoton.split(' ')[2]);
+    const [_, precio] = boton.textContent.trim().split(' ').slice(1);
     const descripcion = boton.parentElement.querySelector('h5').textContent.trim();
-    agregarAlCarrito(precio, descripcion);
+    agregarAlCarrito(parseFloat(precio), descripcion);
   });
 });
+
 
 //----------------------------------
 
@@ -103,7 +88,7 @@ const promocion2 = {
 };
 
 // Función para mostrar la promoción en SweetAlert2
-const mostrarPromocion = (promocion) => {
+const mostrarPromocion = promocion => {
   Swal.fire({
     title: promocion.titulo,
     text: promocion.descripcion,
@@ -111,23 +96,19 @@ const mostrarPromocion = (promocion) => {
     showCancelButton: true,
     confirmButtonText: 'Agregar al carrito',
     cancelButtonText: 'Cancelar'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      agregarPromocionAlCarrito(promocion);
-    }
+  }).then(({ isConfirmed }) => {
+    if (isConfirmed) agregarPromocionAlCarrito(promocion);
   });
 };
 
 // Función para agregar promociones al carrito
-const agregarPromocionAlCarrito = (promocion) => {
+const agregarPromocionAlCarrito = promocion => {
   const descripcion = `${promocion.titulo}: ${promocion.descripcion}`;
   agregarAlCarrito(promocion.precio, descripcion);
 };
 
 // Función para manejar la lógica de mostrar la promoción
-const manejarPromocion = (boton, promocion) => {
-  boton.addEventListener("click", () => mostrarPromocion(promocion));
-};
+const manejarPromocion = (boton, promocion) => boton.addEventListener("click", () => mostrarPromocion(promocion));
 
 // Obtener los botones de las promociones
 const botonPromocion1 = document.getElementById("boton-promocion1");
@@ -139,19 +120,15 @@ manejarPromocion(botonPromocion2, promocion2);
 
 //---------alert promo 3
 
-
 // Objeto para la promoción 3
 const promocion3 = {
   titulo: "Promoción primer compra",
   descripcion: "Si es tu primera compra, tendrás el 50% de descuento en tu carrito!",
   aplicada: localStorage.getItem('promocion3Aplicada') === 'true', // Verificar si ya fue aplicada
-  aplicarDescuento: function() {
+  aplicarDescuento() {
     if (!this.aplicada) {
       // Aplicar descuento del 50% al carrito
-      carrito = carrito.map(item => {
-        item.precio *= 0.5;
-        return item;
-      });
+      carrito = carrito.map(item => ({ ...item, precio: item.precio * 0.5 }));
       guardarCarritoEnLocalStorage();
       mostrarCarrito();
       this.aplicada = true;
@@ -173,8 +150,8 @@ const mostrarPromocion3 = () => {
     showCancelButton: true,
     confirmButtonText: 'Es mi primera compra!',
     cancelButtonText: 'No es mi primera compra'
-  }).then((result) => {
-    if (result.isConfirmed) {
+  }).then(({ isConfirmed }) => {
+    if (isConfirmed) {
       // Usuario confirma que es su primera compra
       promocion3.aplicarDescuento();
       if (!promocion3.aplicada) {
@@ -190,23 +167,22 @@ const botonPromocion3 = document.getElementById("boton-promocion3");
 // Ejecutar la lógica para manejar el botón de la promoción 3
 botonPromocion3.addEventListener("click", mostrarPromocion3);
 
+
 //----sorteo
 
 // Definir función para realizar el sorteo
-function realizarSorteo() {
-  var userNumber = parseInt(document.getElementById("userNumber").value);
-  var randomNumber = Math.floor(Math.random() * 100) + 1;
-  var resultadoSorteo = document.getElementById("resultadoSorteo");
+const realizarSorteo = () => {
+  const userNumber = parseInt(document.getElementById("userNumber").value);
+  const randomNumber = Math.floor(Math.random() * 100) + 1;
+  const resultadoSorteo = document.getElementById("resultadoSorteo");
   
   // Mostrar el número sorteado en el elemento resultadoSorteo
-  resultadoSorteo.innerHTML = "Número sorteado: " + randomNumber;
+  resultadoSorteo.innerHTML = `Número sorteado: ${randomNumber}`;
 
   // Verificar si el número ingresado por el usuario coincide con el número sorteado
-  if (userNumber === randomNumber) {
-      resultadoSorteo.innerHTML += "<br><strong>Ganaste el 40% de descuento!</strong>";
-  } else {
-      resultadoSorteo.innerHTML += "<br><strong>Mala suerte!</strong>";
-  }
+  resultadoSorteo.innerHTML += userNumber === randomNumber ? 
+    "<br><strong>Ganaste el 40% de descuento!</strong>" : 
+    "<br><strong>Mala suerte!</strong>";
 }
 
 const productos = [
@@ -216,37 +192,33 @@ const productos = [
 ];
 
 // Función para mostrar productos
-const mostrarProductos = (productosAMostrar) => {
+const mostrarProductos = productosAMostrar => {
   const resultados = document.getElementById("resultados");
   resultados.innerHTML = "";
 
-  productosAMostrar.forEach((producto) => {
-      const elemento = document.createElement("p");
-      elemento.textContent = `Producto: ${producto.nombre}, Precio: $${producto.precio} USD`;
-      resultados.appendChild(elemento);
+  productosAMostrar.forEach(producto => {
+    const elemento = document.createElement("p");
+    elemento.textContent = `Producto: ${producto.nombre}, Precio: $${producto.precio} USD`;
+    resultados.appendChild(elemento);
   });
 
   if (productosAMostrar.length === 0) {
-      const mensaje = document.createElement("p");
-      mensaje.textContent = "No se encontraron resultados.";
-      resultados.appendChild(mensaje);
+    const mensaje = document.createElement("p");
+    mensaje.textContent = "No se encontraron resultados.";
+    resultados.appendChild(mensaje);
   }
 };
 
 // Función para realizar la búsqueda
-
 const buscar = () => {
-  const input = document.getElementById("searchBar");
-  const query = input.value.toLowerCase();
-
-  const productosCoincidentes = productos.filter((producto) => 
-      producto.nombre.toLowerCase().includes(query)
+  const query = document.getElementById("searchBar").value.toLowerCase();
+  const productosCoincidentes = productos.filter(producto => 
+    producto.nombre.toLowerCase().includes(query)
   );
-
   mostrarProductos(productosCoincidentes);
 };
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", () => {
   const searchBar = document.getElementById("searchBar");
   const botonBuscar = document.getElementById("botonBuscar");
 
@@ -261,7 +233,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 //----------- Sweet alert btn comprar
-
 
 // Obtener el botón de comprar por su ID y agregar evento de clic
 const btnComprar = document.getElementById('comprar');
@@ -282,15 +253,12 @@ btnComprar.addEventListener('click', () => {
         const email = document.getElementById('email').value;
         // Aquí puedes manejar el email (enviarlo a un servidor, etc.)
         // Por ahora solo mostraremos un mensaje con el email ingresado
-        return new Promise((resolve) => {
-          setTimeout(() => {
-            resolve(email);
-          }, 2000); // Simular una operación asincrónica
+        return new Promise(resolve => {
+          setTimeout(() => resolve(email), 2000); // Simular una operación asincrónica
         });
       }
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const email = result.value; // Obtener el email ingresado
+    }).then(({ isConfirmed, value: email }) => {
+      if (isConfirmed) {
         // Aquí puedes continuar con lo que necesites hacer con el email
         console.log(`Email del usuario: ${email}`);
 
@@ -318,5 +286,25 @@ btnComprar.addEventListener('click', () => {
 // Mostrar carrito al cargar la página
 document.addEventListener("DOMContentLoaded", mostrarCarrito);
 
+//---- clima
 
+// Función para simular datos de clima
+const simularClima = () => ({
+  temperatura: Math.floor(Math.random() * 51) - 10, // Generar valores aleatorios para temperatura (en grados Celsius)
+  humedad: Math.floor(Math.random() * 81) + 20, // Generar valores aleatorios para humedad (en porcentaje)
+  velocidadViento: Math.floor(Math.random() * 46) + 5, // Generar valores aleatorios para velocidad del viento (en km/h)
+  descripcion: [
+    "Despejado", "Nublado", "Parcialmente nublado", "Lluvioso", 
+    "Tormentas", "Neblina", "Nieve ligera", "Nieve intensa"
+  ][Math.floor(Math.random() * 8)] // Generar valores aleatorios para la descripción del clima
+});
 
+// Ejemplo de uso: Simular datos de clima
+const datosClima = simularClima();
+console.log(datosClima);
+
+// Llenar los elementos HTML con los datos simulados
+document.getElementById('temperatura').textContent = datosClima.temperatura;
+document.getElementById('humedad').textContent = datosClima.humedad;
+document.getElementById('velocidad-viento').textContent = datosClima.velocidadViento;
+document.getElementById('descripcion').textContent = datosClima.descripcion;
