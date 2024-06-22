@@ -135,7 +135,7 @@
             <div class="d-flex justify-content-between">
                 <button id="boton-promocion1" class="boton-contacto2">Ver promoción 1</button>
                 <button id="boton-promocion2" class="boton-contacto3">Ver promoción 2</button>
-                <button id="boton-promocion3" id="boton-contacto4">¡Promoción para México!</button>
+                <button id="boton-promocion3">¡Promoción primer compra!</button>
             </div>
         </section>
     </div>
@@ -190,13 +190,16 @@
         </section>
     </div>
 
-    <section id="noticias-section" class="container text-center section-montserrat d-flex flex-column justify-content-center align-items-center">
-        <h1>Últimas Noticias que pueden interesarte</h1>
-        <div class="row" id="noticias-container">
-            <!-- Aquí se cargarán dinámicamente las noticias -->
+    <div class="container">
+        <h1 class="text-center mb-4">Clima actual (simulación) </h1>
+        <div id="clima-container" class="text-center">
+            <p>Temperatura: <span id="temperatura"></span> °C</p>
+            <p>Humedad: <span id="humedad"></span>%</p>
+            <p>Velocidad del Viento: <span id="velocidad-viento"></span> km/h</p>
+            <p>Descripción: <span id="descripcion"></span></p>
         </div>
-    </section>
-
+    </div>
+   
     <footer>
         <div class="logo-footer">
             <img src="../assets/Imagenes/logotransparenteparafondonegro.png" alt="Logo footer">
@@ -217,8 +220,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/main.js"></script>
     <script src="ruta/a/language.js"></script>
-
-
+    <script src="/js/noticias.js"></script>
 </body>
 
 </html>

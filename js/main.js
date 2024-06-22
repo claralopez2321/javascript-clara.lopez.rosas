@@ -72,6 +72,12 @@ const btnCerrarCarrito = document.getElementById('cerrar-carrito');
 // Agregar evento de clic al botón de cerrar carrito
 btnCerrarCarrito.addEventListener('click', cerrarCarrito);
 
+// Obtener el botón de abrir carrito por su ID
+const carritoButton = document.getElementById('carrito-button');
+
+// Agregar evento de clic al botón de abrir carrito
+carritoButton.addEventListener('click', abrirCarrito);
+
 // Obtener todos los botones de agregar al carrito por su clase y agregar evento de clic
 document.querySelectorAll('.btn.btn-primary.bg-warning').forEach(boton => {
   boton.addEventListener('click', () => {
@@ -130,6 +136,59 @@ const botonPromocion2 = document.getElementById("boton-promocion2");
 // Ejecutar la lógica para manejar cada botón y su respectiva promoción
 manejarPromocion(botonPromocion1, promocion1);
 manejarPromocion(botonPromocion2, promocion2);
+
+//---------alert promo 3
+
+
+// Objeto para la promoción 3
+const promocion3 = {
+  titulo: "Promoción primer compra",
+  descripcion: "Si es tu primera compra, tendrás el 50% de descuento en tu carrito!",
+  aplicada: localStorage.getItem('promocion3Aplicada') === 'true', // Verificar si ya fue aplicada
+  aplicarDescuento: function() {
+    if (!this.aplicada) {
+      // Aplicar descuento del 50% al carrito
+      carrito = carrito.map(item => {
+        item.precio *= 0.5;
+        return item;
+      });
+      guardarCarritoEnLocalStorage();
+      mostrarCarrito();
+      this.aplicada = true;
+      localStorage.setItem('promocion3Aplicada', 'true'); // Marcar como aplicada en localStorage
+      console.log("Descuento del 50% aplicado al carrito.");
+    } else {
+      console.log("Promoción ya aplicada anteriormente.");
+      Swal.fire('Promoción ya aplicada', 'No puedes aplicar esta promoción más de una vez.', 'error');
+    }
+  }
+};
+
+// Función para mostrar SweetAlert2 con la promoción 3
+const mostrarPromocion3 = () => {
+  Swal.fire({
+    title: promocion3.titulo,
+    text: promocion3.descripcion,
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonText: 'Es mi primera compra!',
+    cancelButtonText: 'No es mi primera compra'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Usuario confirma que es su primera compra
+      promocion3.aplicarDescuento();
+      if (!promocion3.aplicada) {
+        Swal.fire('¡Promoción aplicada!', 'Descuento del 50% aplicado en tu carrito.', 'success');
+      }
+    }
+  });
+};
+
+// Obtener el botón de la promoción 3
+const botonPromocion3 = document.getElementById("boton-promocion3");
+
+// Ejecutar la lógica para manejar el botón de la promoción 3
+botonPromocion3.addEventListener("click", mostrarPromocion3);
 
 //----sorteo
 
@@ -225,14 +284,20 @@ btnComprar.addEventListener('click', () => {
         // Por ahora solo mostraremos un mensaje con el email ingresado
         return new Promise((resolve) => {
           setTimeout(() => {
-            resolve();
+            resolve(email);
           }, 2000); // Simular una operación asincrónica
         });
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        const email = document.getElementById('email').value;
+        const email = result.value; // Obtener el email ingresado
         // Aquí puedes continuar con lo que necesites hacer con el email
+        console.log(`Email del usuario: ${email}`);
+
+        // Calcular el total de la compra
+        const total = carrito.reduce((acc, item) => acc + item.precio, 0);
+        console.log(`Monto de la compra: $${total} USD`);
+
         Swal.fire({
           title: 'Gracias!',
           html: `Hemos enviado la factura a <strong>${email}</strong>.`,
@@ -254,51 +319,4 @@ btnComprar.addEventListener('click', () => {
 document.addEventListener("DOMContentLoaded", mostrarCarrito);
 
 
-//noticiAS
 
-document.addEventListener('DOMContentLoaded', function() {
-  const noticiasContainer = document.getElementById('noticias-container');
-
-  // URL de la API de noticias (reemplaza con tu propia URL)
-  const apiKey = 'ee448611893848f39d508fad6c4f8f3f';
-  const apiUrl = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
-
-  // Realizar solicitud a la API de noticias
-  fetch(apiUrl)
-      .then(response => response.json())
-      .then(data => {
-          let noticias = data.articles.slice(0, 3); // Tomar solo las primeras 3 noticias
-
-          // Reorganizar aleatoriamente las noticias
-          noticias = shuffleArray(noticias);
-
-          // Construir las tarjetas de noticias
-          noticias.forEach(noticia => {
-              const noticiaCard = `
-                  <div class="col-md-4">
-                      <div class="card noticia-card">
-                          <img src="${noticia.urlToImage}" class="card-img-top" alt="Imagen de la noticia">
-                          <div class="card-body">
-                              <h5 class="card-title">${noticia.title}</h5>
-                              <p class="card-text">${noticia.description}</p>
-                              <a href="${noticia.url}" target="_blank" class="btn btn-primary">Leer más</a>
-                          </div>
-                      </div>
-                  </div>
-              `;
-              noticiasContainer.innerHTML += noticiaCard;
-          });
-      })
-      .catch(error => {
-          console.error('Error al obtener noticias:', error);
-      });
-
-  // Función para reordenar aleatoriamente un array (Algoritmo de Fisher-Yates)
-  function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-  }
-});

@@ -693,4 +693,16 @@ button:hover {
 }
 
 
+.carrito-lateral {
+    display: none; /* Oculto por defecto */
+}
 
+.carrito-lateral.visible {
+    display: block; /* Visible cuando se añade la clase 'visible' */
+}
+
+
+.card {
+    width: 300px;
+    margin: auto;
+}
