@@ -81,7 +81,7 @@ document.querySelectorAll('.btn.btn-primary.bg-warning').forEach(boton => {
 // Definir las promociones como objetos literales
 const promocion1 = {
   titulo: "Promoción 1",
-  descripcion: "¡Aprovecha nuestra oferta especial de edición de fotografías! ¡Transforma tus imágenes en obras de arte digitales por 50 usd!.",
+  descripcion: "¡Aprovecha nuestra oferta especial de edición de fotografías! ¡Transforma tus imágenes en obras de arte digitales por 50 USD!.",
   precio: 50
 };
 
@@ -261,4 +261,5 @@ btnComprar.addEventListener('click', async () => {
 
 // Mostrar el carrito al cargar la página
 document.addEventListener("DOMContentLoaded", mostrarCarrito);
+
 
